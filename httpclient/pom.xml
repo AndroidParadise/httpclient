@@ -106,6 +106,59 @@
           </execution>
         </executions>
       </plugin>
+
+   <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.2</version>
+        <executions>
+            <execution>
+                <phase>package</phase>
+                <goals>
+                    <goal>shade</goal>
+                </goals>
+                <configuration>
+                    <shadedArtifactAttached>true</shadedArtifactAttached>
+                    <shadedClassifierName>android-paradise</shadedClassifierName>
+                    <artifactSet>
+                        <includes>
+                            <include>org.apache.httpcomponents:httpclient</include>
+                            <!--
+                            <include>org.apache.httpcomponents:httpcore</include>
+                            <include>org.apache.httpcomponents:httpcore-nio</include>
+                            <include>org.apache.httpcomponents:httpasyncclient</include>
+                            <include>org.apache.httpcomponents:httpmime</include>
+                            <include>org.json:json</include>
+                            <include>commons-logging:commons-logging</include>
+                            <include>commons-codec:commons-codec</include>
+                            -->
+                        </includes>
+                    </artifactSet>
+                    <relocations>
+                        <relocation>
+                            <pattern>org.apache.http</pattern>
+                            <shadedPattern>shaded.org.apache.http</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>org.apache.commons.codec</pattern>
+                            <shadedPattern>shaded.org.apache.commons.codec</shadedPattern>
+                        </relocation>
+                        <!--
+                        <relocation>
+                            <pattern>org.json</pattern>
+                            <shadedPattern>shaded.org.json</shadedPattern>
+                        </relocation>
+                        -->
+                        <relocation>
+                            <pattern>org.apache.commons.logging</pattern>
+                            <shadedPattern>shaded.org.apache.commons.logging</shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
+    
     </plugins>
   </build>
 
